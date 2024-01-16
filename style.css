@@ -1,8 +1,13 @@
+body {
+  background-image: url("./images/background.jpg");
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .header-container {
-  display: flex;
-  flex-flow: row wrap;
+  padding: 10px;
   margin: 10px;
-  background-color: aqua;
+  background-color: rgba(225, 255, 227, 0.548);
+  text-align: center;
 }
 
 .sections {
@@ -15,6 +20,10 @@
   background-color: lightblue;
 }
 
+.card {
+  width: 100px;
+}
+
 .section-container {
   /* margin: 10px;
   padding: 0 10px 0 10px; */
@@ -23,11 +32,28 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  margin: 30px 0;
 }
 
 .footer-container {
+  padding: 6px;
+  background-color: rgba(225, 255, 227, 0.548);
+  text-align: center;
+}
+
+.popup {
+  width: 30%;
+  height: 25%;
+  margin: 20% 35%;
+  position: fixed;
+  z-index: 1;
   display: flex;
-  flex-flow: row wrap;
-  margin: 10px;
-  background-color: lightseagreen;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(42, 148, 38);
+  border-color: black;
+  color: white;
+  border-width: 5px;
+  border-style: solid;
 }
