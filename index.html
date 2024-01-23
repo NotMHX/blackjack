@@ -8,13 +8,12 @@
     <title>Blackjack</title>
   </head>
   <body>
-    <div class="popup">
+    <!-- <div class="popup">
       <p>Hallo ich bin ein Popup</p>
-      <button onclick="drawThirdCard() ">OK???</button>
-      <button onclick="holdcards()">OK??</button>
+      <button onclick="drawThirdCard() ">hit</button>
+      <button onclick="holdcards()">stand</button>
+    </div> -->
 
-    </div>
-  
     <header class="header-container">
       <h1>BLACKJACK</h1>
       <p>Kontostand: 0</p>
@@ -22,16 +21,12 @@
 
     <section class="section-container">
       <div class="sections" id="bank">
-      
-
         <p>Bank</p>
       </div>
     </section>
 
     <section class="section-container">
-      <div class="sections" id="randomCardDisplay" >
-  
-
+      <div class="sections" id="randomCardDisplay">
         <p>Spieler 1</p>
       </div>
 
@@ -47,6 +42,9 @@
         <p>Spieler 3</p>
       </div>
     </section>
+
+    <button onclick="drawThirdCard() ">hit</button>
+    <button onclick="holdcards()">stand</button>
 
     <footer class="footer-container">
       <h4>Made by Michael Herrmann, Luca Dal Corso, Dominik Hartmann</h4>
