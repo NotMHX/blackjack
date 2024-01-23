@@ -266,8 +266,13 @@ function getRandomCard() {
     return cards[randomIndex];
 }
 
+
 let summe = 0;
 let round = 0;
+
+
+
+
 
 while (round < 2) {
     const randomCard = getRandomCard();
@@ -288,7 +293,7 @@ while (round < 2) {
     console.log("current sum: " + summe);
 
     if (summe === 21) {
-        console.log("you win");
+        showPopup("you win");
         break;
     }
 }
@@ -314,7 +319,7 @@ function drawThirdCard() {
     console.log("Summe nach der dritten Karte:", summe);
 
     if (summe > 21) {
-        console.log("you lose");
+        showPopup("you lose");
     }
 }
 
@@ -349,10 +354,10 @@ function holdcards() {
 
 
     if (kisumme > 21 || (kisumme < 21 && kisumme < summe)) {
-        console.log("you won");
+        showPopup("you won");
     }
     if (kisumme < 21 && kisumme > summe) {
-        console.log("you lose");
+        showPopup("you lose");
     }
 }
 
@@ -387,7 +392,31 @@ while (roundForComputer < 2) {
 
     if (kisumme === 21) {
         bankDiv.appendChild(cardImage);
-        console.log("you lose");
+        showPopup("you lose");
         break;
     }
+}
+
+function showPopup(text) {
+    const popupDiv = document.createElement("div");
+    popupDiv.className = "popup";
+
+    // text
+    const popupText = document.createElement("p");
+    popupText.textContent = text;
+    popupDiv.appendChild(popupText);
+
+    // play again button
+    // const popupBtnPlay = document.createElement("button");
+    // popupBtnPlay.setAttribute("onClick", "playAgain()");
+    // popupBtnPlay.textContent = "Play again";
+    //popupDiv.appendChild(popupBtnPlay);
+
+    // reset button
+    const popupBtnReset = document.createElement("button");
+    popupBtnReset.setAttribute("onClick", "location.reload()");
+    popupBtnReset.textContent = "Reset";
+    popupDiv.appendChild(popupBtnReset);
+
+    document.getElementById("popupContainer").appendChild(popupDiv);
 }
