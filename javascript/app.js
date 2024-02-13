@@ -266,40 +266,42 @@ function getRandomCard() {
   return cards[randomIndex];
 }
 
-let summe = 0;
+let sumPlayers = [0, 0, 0];
 let round = 0;
 
 while (round < 2) {
-  const randomCard = getRandomCard();
-  console.log("Zufällige Karte:", randomCard);
+  for (let currentPlayer = 1; currentPlayer <= 3; currentPlayer++) {
+    const randomCard = getRandomCard();
+    console.log("Zufällige Karte:", randomCard);
 
-  const displayDiv = document.getElementById("randomCardDisplay");
+    const displayDiv = document.getElementById(`cardDisplay${currentPlayer}`);
+    console.log("current display = " + `cardDisplay${currentPlayer}`);
 
-  const cardImage = document.createElement("img");
-  cardImage.src = randomCard.url;
-  cardImage.alt = randomCard.name;
-  cardImage.className = "card";
+    const cardImage = document.createElement("img");
+    cardImage.src = randomCard.url;
+    cardImage.alt = randomCard.name;
+    cardImage.className = "card";
 
-  displayDiv.appendChild(cardImage);
+    displayDiv.appendChild(cardImage);
+    sumPlayers[currentPlayer - 1] += randomCard.value;
 
-  summe += randomCard.value;
+    if (sumPlayers[currentPlayer - 1] === 21) {
+      showPopup("you win; reaching 21");
+      break;
+    }
+  }
   round++;
 
-  console.log("current sum: " + summe);
-
-  if (summe === 21) {
-    console.log("you win");
-    break;
-  }
+  console.log("current sum: " + sumPlayers);
 }
 
-function drawThirdCard() {
+function drawThirdCard(currentPlayer) {
   if (round < 2) {
     alert("You need to draw two cards first!");
     return;
   }
-  if (summe < 21) {
-    const displayDiv = document.getElementById("randomCardDisplay");
+  if (sumPlayers[currentPlayer - 1] < 21) {
+    const displayDiv = document.getElementById(`cardDisplay${currentPlayer}`);
     const randomCard = getRandomCard();
     const cardImage = document.createElement("img");
     cardImage.src = randomCard.url;
@@ -308,17 +310,17 @@ function drawThirdCard() {
 
     displayDiv.appendChild(cardImage);
 
-    summe += randomCard.value;
+    sumPlayers[currentPlayer - 1] += randomCard.value;
   }
 
-  console.log("Summe nach der dritten Karte:", summe);
+  console.log("Summe nach der dritten Karte:", sumPlayers);
 
-  if (summe > 21) {
-    console.log("you lose");
+  if (sumPlayers[currentPlayer - 1] > 21) {
+    showPopup("you lose");
   }
 }
 
-function holdcards() {
+function holdcards(currentPlayer) {
   while (kisumme < 17) {
     const displayDiv = document.getElementById("bank");
     const randomCard = getRandomCard();
@@ -344,11 +346,14 @@ function holdcards() {
     roundForComputer++;
     kisumme += randomCard.value;
   }
-  if (kisumme > 21 || (kisumme < 21 && kisumme < summe)) {
-    console.log("you won");
+  if (
+    kisumme > 21 ||
+    (kisumme < 21 && kisumme < sumPlayers[currentPlayer - 1])
+  ) {
+    showPopup("you win; comp too high");
   }
-  if (kisumme < 21 && kisumme > summe) {
-    console.log("you lose");
+  if (kisumme < 21 && kisumme > sumPlayers[currentPlayer - 1]) {
+    showPopup("you lose");
   }
 }
 
@@ -383,7 +388,31 @@ while (roundForComputer < 2) {
 
   if (kisumme === 21) {
     bankDiv.appendChild(cardImage);
-    console.log("you lose");
+    showPopup("you lose");
     break;
   }
+}
+
+function showPopup(text) {
+  const popupDiv = document.createElement("div");
+  popupDiv.className = "popup";
+
+  // text
+  const popupText = document.createElement("p");
+  popupText.textContent = text;
+  popupDiv.appendChild(popupText);
+
+  // play again button
+  // const popupBtnPlay = document.createElement("button");
+  // popupBtnPlay.setAttribute("onClick", "playAgain()");
+  // popupBtnPlay.textContent = "Play again";
+  //popupDiv.appendChild(popupBtnPlay);
+
+  // reset button
+  const popupBtnReset = document.createElement("button");
+  popupBtnReset.setAttribute("onClick", "location.reload()");
+  popupBtnReset.textContent = "Reset";
+  popupDiv.appendChild(popupBtnReset);
+
+  document.getElementById("popupContainer").appendChild(popupDiv);
 }
