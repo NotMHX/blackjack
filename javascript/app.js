@@ -281,6 +281,10 @@ while (round < 2) {
     cardImage.src = randomCard.url;
     cardImage.alt = randomCard.name;
     cardImage.className = "card";
+    const cardImage = document.createElement("img");
+    cardImage.src = randomCard.url;
+    cardImage.alt = randomCard.name;
+    cardImage.className = "card";
 
     displayDiv.appendChild(cardImage);
     sumPlayers[currentPlayer - 1] += randomCard.value;
@@ -323,12 +327,16 @@ function drawThirdCard(currentPlayer) {
 function holdcards(currentPlayer) {
   while (kisumme < 17) {
     const displayDiv = document.getElementById("bank");
-    const randomCard = getRandomCard();
     const cardImage = document.createElement("img");
-    cardImage.src = randomCard.url;
-    cardImage.alt = randomCard.name;
-    cardImage.className = "card";
+    while (kisumme < 17) {
+      const randomCard = getRandomCard();
 
+      cardImage.src = randomCard.url;
+      cardImage.alt = randomCard.name;
+      cardImage.className = "card";
+      displayDiv.appendChild(cardImage);
+      kisumme += randomCard.value;
+    }
     // replace url of last image
     let lastIndex = roundForComputer - 1;
     console.log("the last index is " + lastIndex);
