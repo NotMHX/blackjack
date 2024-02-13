@@ -8,48 +8,42 @@
     <title>Blackjack</title>
   </head>
   <body>
-    <div class="popup">
-      <p>Hallo ich bin ein Popup</p>
-      <button>OK???</button>
-    </div>
-    <script src="./javascript/app.js"></script>
+    <div id="popupContainer"></div>
+
     <header class="header-container">
       <h1>BLACKJACK</h1>
       <p>Kontostand: 0</p>
     </header>
 
     <section class="section-container">
-      <div class="sections">
-        <img class="card" src="images/cards/king_of_clubs.png" />
-
+      <div class="sections" id="bank">
         <p>Bank</p>
       </div>
     </section>
 
     <section class="section-container">
-      <div class="sections">
-        <img class="card" src="images/cards/7_of_clubs.png" />
-        <img class="card" src="images/cards/2_of_hearts.png" />
-
+      <div class="sections" id="cardDisplay1">
         <p>Spieler 1</p>
       </div>
 
-      <div class="sections">
-        <img class="card" src="images/cards/8_of_clubs.png" />
-
+      <div class="sections" id="cardDisplay2">
         <p>Spieler 2</p>
       </div>
 
-      <div class="sections">
-        <img class="card" src="images/cards/9_of_clubs.png" />
-
+      <div class="sections" id="cardDisplay3">
         <p>Spieler 3</p>
       </div>
     </section>
 
+    <section class="section-container">
+      <button class="button" id="buttonHit">Hit</button>
+      <button class="button" id="buttonStand">Stand</button>
+    </section>
+<p id="player"></p>
     <footer class="footer-container">
       <h4>Made by Michael Herrmann, Luca Dal Corso, Dominik Hartmann</h4>
       <a href="https://github.com/NotMHX/blackjack">GitHub</a>
     </footer>
+    <script type="module" src="./javascript/app.js"></script>
   </body>
 </html>
