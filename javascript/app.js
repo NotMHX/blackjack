@@ -281,10 +281,6 @@ while (round < 2) {
     cardImage.src = randomCard.url;
     cardImage.alt = randomCard.name;
     cardImage.className = "card";
-    const cardImage = document.createElement("img");
-    cardImage.src = randomCard.url;
-    cardImage.alt = randomCard.name;
-    cardImage.className = "card";
 
     displayDiv.appendChild(cardImage);
     sumPlayers[currentPlayer - 1] += randomCard.value;
