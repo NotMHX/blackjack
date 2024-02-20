@@ -1,4 +1,15 @@
 import { getRandomCard } from "./cards.js";
+
+// websocket test
+
+const ws = new WebSocket("ws://localhost:8080");
+
+ws.addEventListener("open", () => {
+  console.log("I connected to the server yay");
+});
+
+// app
+
 document
   .getElementById("buttonHit")
   .addEventListener("click", () => drawThirdCard(order));
