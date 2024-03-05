@@ -12,7 +12,75 @@ let unknownCardImageUrl = "";
 let currentCard = 1;
 let playerCount = 3;
 let order = 1;
+let kontoPlayer = [100, 100, 100];
+let amount = [0, 0, 0];
 document.getElementById(`player1`).style.backgroundColor = "#30beee";
+
+betCoins();
+
+function betCoins(){
+  console.log("start")
+  document.getElementById("popupContainer").innerHTML = '';
+  currentCard = 1;
+  sumBank = 0;
+  sumPlayers[0] = 0;
+  sumPlayers[1] = 0;
+  sumPlayers[2] = 0;
+  unknownCardImageUrl = "";
+  order = 1;
+  
+  let input1 = document.createElement("input");
+  let input2 = document.createElement("input");
+  let input3 = document.createElement("input");
+  let button = document.createElement("button");
+  
+  // Setze die Typen der Eingabefelder
+  input1.type = "number";
+  input2.type = "number";
+  input3.type = "number";
+  
+  // Setze Platzhaltertext für die Eingabefelder
+  input1.placeholder = "Bet Coins Player 1";
+  input2.placeholder = "Bet Coins Player 2";
+  input3.placeholder = "Bet Coins Player 3";
+  
+  // Füge die Eingabefelder dem DOM hinzu
+  let test = document.getElementById("test");
+  test.appendChild(input1);
+  test.appendChild(input2);
+  test.appendChild(input3);
+
+  button.textContent = "Bet Coins";
+  button.addEventListener("click", () => {
+    console.log("Bet Coins");
+    
+    console.log(input1.value)
+    amount[0] = input1.value;
+    amount[1] = input2.value;
+    amount[2] = input3.value;
+    console.log(amount);
+    
+    startGame();
+  });
+  test.appendChild(button);
+  
+}
+
+function tradeCoins(){
+  console.log("here");
+  for(let i = 0; i < 3; i++){
+    if(sumPlayers[i] <= 21 && sumPlayers[i] > sumBank || sumPlayers[i] <= 21 && sumBank > 21){
+      kontoPlayer[i] += amount[i];
+      showPopup(`win Player ` + i)
+    }else{
+      kontoPlayer[i] -= amount[i];
+    }
+  }
+  showPopup("loose player");
+}
+
+function startGame(){
+  console.log(kontoPlayer)
 
 // gives every player & bank two cards
 for (currentCard; currentCard <= 2; currentCard++) {
@@ -28,10 +96,10 @@ for (currentCard; currentCard <= 2; currentCard++) {
     cardImage.src = randomCard.url;
     cardImage.alt = randomCard.name;
     cardImage.className = "card";
-
+console.log(sumPlayers)
     displayDiv.appendChild(cardImage);
     sumPlayers[currentPlayer - 1] += randomCard.value;
-
+console.log(sumPlayers)
     if (sumPlayers[currentPlayer - 1] == 21) {
       if (order == 3) {
         order = 0;
@@ -72,7 +140,7 @@ for (currentCard; currentCard <= 2; currentCard++) {
     break;
   }
 }
-
+}
 function nextPlayer() {
   let lastColor;
   if (order == playerCount) {
@@ -150,23 +218,8 @@ function checkSum(currentPlayer) {
       // add new card
       displayDiv.appendChild(cardImage);
     }
-    if (sumBank > 21 && sumPlayers[currentPlayer - 1] < 21) {
-      showPopup("you win; comp too high");
-    }
-    if (
-      sumBank < 21 &&
-      sumBank < sumPlayers[currentPlayer - 1] &&
-      sumPlayers[currentPlayer - 1] < 21
-    ) {
-      showPopup("you win; comp too low");
-    }
-    if (
-      sumBank < 21 &&
-      sumBank > sumPlayers[currentPlayer - 1] &&
-      sumPlayers[currentPlayer - 1] < 21
-    ) {
-      showPopup("you lose");
-    }
+    tradeCoins();
+
   } else {
     nextPlayer();
   }
@@ -182,10 +235,10 @@ export function showPopup(text) {
   popupDiv.appendChild(popupText);
 
   // play again button
-  // const popupBtnPlay = document.createElement("button");
-  // popupBtnPlay.setAttribute("onClick", "playAgain()");
-  // popupBtnPlay.textContent = "Play again";
-  //popupDiv.appendChild(popupBtnPlay);
+  const popupBtnPlay = document.createElement("button");
+  popupBtnPlay.addEventListener("onClick", () => betCoins());
+  popupBtnPlay.textContent = "Play again";
+  popupDiv.appendChild(popupBtnPlay);
 
   // reset button
   const popupBtnReset = document.createElement("button");
