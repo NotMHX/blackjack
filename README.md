@@ -1,2 +1,3 @@
-# blackjack
-Blackjack-Spiel im Browser
+# Blackjack
+
+Nur Frontend. Kann mit Live Server gestartet werden.

@@ -44,7 +44,6 @@ betCoins();
 function betCoins() {
   console.log("start");
 
-
   document.getElementById("popupContainer").innerHTML = "";
   currentCard = 1;
   sumBank = 0;
@@ -54,22 +53,15 @@ function betCoins() {
   unknownCardImageUrl = "";
   order = 1;
 
-
-
   button.addEventListener("click", () => {
     console.log("Bet Coins");
     document.getElementById("buttonHit").style.display = "block";
     document.getElementById("buttonStand").style.display = "block";
 
-
     console.log(input1.value);
     amount[0] = input1.value;
     amount[1] = input2.value;
     amount[2] = input3.value;
-
-
-
-
 
     console.log(amount);
 
@@ -85,13 +77,13 @@ function tradeCoins() {
       (sumPlayers[i] <= 21 && sumPlayers[i] > sumBank) ||
       (sumPlayers[i] <= 21 && sumBank > 21)
     ) {
-      kontoPlayer[i] += Number(amount[i])
+      kontoPlayer[i] += Number(amount[i]);
       showPopup(`win Player ${i}`);
     } else {
       kontoPlayer[i] -= amount[i];
     }
   }
-  showPopup("loose player");
+  showPopup("Game Over");
 }
 
 function startGame() {
@@ -160,7 +152,7 @@ function startGame() {
 
     if (sumBank === 21) {
       bankDiv.appendChild(cardImage);
-      showPopup("you lose");
+      showPopup("Game Over");
       break;
     }
   }
@@ -206,7 +198,7 @@ function drawThirdCard(currentPlayer) {
 
     if (order == playerCount) {
       document.getElementById(`player${order}`).style.backgroundColor = "gray";
-      showPopup("The computer won, you all lost.");
+      showPopup("The bank won");
     } else {
       nextPlayer();
       document.getElementById(`player${order - 1}`).style.backgroundColor =
