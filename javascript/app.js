@@ -18,11 +18,32 @@ let order = 1;
 let kontoPlayer = [100, 100, 100];
 let amount = [0, 0, 0];
 document.getElementById(`player1`).style.backgroundColor = "#30beee";
+let input1 = document.createElement("input");
+let input2 = document.createElement("input");
+let input3 = document.createElement("input");
+let button = document.createElement("button");
 
+// Setze die Typen der Eingabefelder
+input1.type = "number";
+input2.type = "number";
+input3.type = "number";
+
+// Setze Platzhaltertext für die Eingabefelder
+input1.placeholder = "Bet Coins Player 1";
+input2.placeholder = "Bet Coins Player 2";
+input3.placeholder = "Bet Coins Player 3";
+
+// Füge die Eingabefelder dem DOM hinzu
+let test = document.getElementById("test");
+test.appendChild(input1);
+test.appendChild(input2);
+test.appendChild(input3);
+button.textContent = "Bet Coins";
 betCoins();
 
 function betCoins() {
   console.log("start");
+
 
   document.getElementById("popupContainer").innerHTML = "";
   currentCard = 1;
@@ -33,37 +54,23 @@ function betCoins() {
   unknownCardImageUrl = "";
   order = 1;
 
-  let input1 = document.createElement("input");
-  let input2 = document.createElement("input");
-  let input3 = document.createElement("input");
-  let button = document.createElement("button");
 
-  // Setze die Typen der Eingabefelder
-  input1.type = "number";
-  input2.type = "number";
-  input3.type = "number";
-
-  // Setze Platzhaltertext für die Eingabefelder
-  input1.placeholder = "Bet Coins Player 1";
-  input2.placeholder = "Bet Coins Player 2";
-  input3.placeholder = "Bet Coins Player 3";
-
-  // Füge die Eingabefelder dem DOM hinzu
-  let test = document.getElementById("test");
-  test.appendChild(input1);
-  test.appendChild(input2);
-  test.appendChild(input3);
-  button.textContent = "Bet Coins";
 
   button.addEventListener("click", () => {
     console.log("Bet Coins");
     document.getElementById("buttonHit").style.display = "block";
     document.getElementById("buttonStand").style.display = "block";
 
+
     console.log(input1.value);
     amount[0] = input1.value;
     amount[1] = input2.value;
     amount[2] = input3.value;
+
+
+
+
+
     console.log(amount);
 
     startGame();
@@ -78,7 +85,7 @@ function tradeCoins() {
       (sumPlayers[i] <= 21 && sumPlayers[i] > sumBank) ||
       (sumPlayers[i] <= 21 && sumBank > 21)
     ) {
-      kontoPlayer[i] += amount[i];
+      kontoPlayer[i] += Number(amount[i])
       showPopup(`win Player ${i}`);
     } else {
       kontoPlayer[i] -= amount[i];
@@ -253,7 +260,7 @@ export function showPopup(text) {
 
   // play again button
   const popupBtnPlay = document.createElement("button");
-  popupBtnPlay.setAttribute("onClick", "() => betCoins()");
+  popupBtnPlay.addEventListener("click", () => betCoins());
   popupBtnPlay.textContent = "Play again";
   popupDiv.appendChild(popupBtnPlay);
 
