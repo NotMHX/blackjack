@@ -87,7 +87,9 @@ function betCoins() {
 
     console.log(amount);
 
-    startGame();
+        if (validBets == true) {
+      startGame();
+    }
   });
 
   test.appendChild(button);
