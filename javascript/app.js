@@ -107,7 +107,7 @@ function tradeCoins() {
       kontoPlayer[i] -= amount[i];
     }
 
-    if (kontoPlayer[i] < 0) {
+    if (kontoPlayer[i] < 1) {
       location.reload();
     }
 
